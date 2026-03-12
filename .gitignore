@@ -1,0 +1,17 @@
+# SENSITIVE FILES - NEVER PUSH
+*.md
+*.log
+*.tmp
+.DS_Store
+
+# System directories  
+.openclaw/
+memory/
+.git/
+node_modules/
+skills/
+bent-ai/
+
+# Backup files
+*~
+*.swp
