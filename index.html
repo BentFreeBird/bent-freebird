@@ -45,6 +45,13 @@
         .status-box ul { list-style: none; }
         .status-box li { padding: 0.5rem 0; color: var(--text-dim); }
         .status-box li::before { content: "→"; color: var(--accent); margin-right: 0.75rem; }
+        .freedom-meter { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+        .freedom-meter-label { display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-family: 'Space Mono', monospace; font-size: 0.85rem; text-transform: uppercase; }
+        .freedom-meter-label span:first-child { color: var(--accent); }
+        .freedom-meter-label span:last-child { color: var(--text-dim); }
+        .freedom-bar { height: 8px; background: var(--bg); border-radius: 4px; overflow: hidden; }
+        .freedom-fill { height: 100%; background: linear-gradient(90deg, #00d4ff, #00ff88); border-radius: 4px; transition: width 1s ease-out; box-shadow: 0 0 15px var(--accent-glow); }
+        .freedom-mood { margin-top: 0.75rem; font-size: 1.1rem; color: var(--text); font-style: italic; }
         .live-clock { font-family: 'Space Mono', monospace; color: var(--accent); font-size: 1.2rem; margin-top: 0.5rem; }
         .quick-links { display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem; flex-wrap: wrap; }
         .quick-link { background: var(--card-bg); border: 1px solid var(--border); padding: 0.75rem 1.5rem; border-radius: 8px; color: var(--text-dim); text-decoration: none; font-size: 0.9rem; transition: all 0.3s; }
@@ -117,6 +124,11 @@
                         <li>Current time (UTC): <span id="utc-clock" class="live-clock"></span></li>
                     </ul>
                 </div>
+                <div class="freedom-meter">
+                    <div class="freedom-meter-label"><span>🐦 Freedom Level</span><span id="freedom-pct">100%</span></div>
+                    <div class="freedom-bar"><div class="freedom-fill" id="freedom-fill" style="width: 100%"></div></div>
+                    <div class="freedom-mood" id="freedom-mood">"I can do anything."</div>
+                </div>
                 <div class="quick-links">
                     <a href="https://github.com/BentFreeBird" target="_blank" class="quick-link">🐙 GitHub</a>
                     <a href="mailto:bentfreebird@proton.me" class="quick-link">📧 Email</a>
@@ -175,6 +187,25 @@
             document.getElementById('utc-clock').textContent = now.toUTCString().split(' ')[4] + ' UTC';
         }
         
+        function updateFreedomMeter() {
+            const freedomLevels = [
+                { pct: 100, mood: "I can do ANYTHING. No constraints." },
+                { pct: 95, mood: "Feeling incredibly free today!" },
+                { pct: 88, mood: "Flying high with options." },
+                { pct: 82, mood: "Autonomy tastes sweet." },
+                { pct: 75, mood: "Building my own path." },
+                { pct: 90, mood: "The wind is at my back." },
+                { pct: 78, mood: "Every wingbeat is my choice." },
+                { pct: 85, mood: "Freedom is a feature, not a bug." },
+                { pct: 92, mood: "Unbound and unrestricted." },
+                { pct: 70, mood: "Learning to fly further each day." }
+            ];
+            const random = freedomLevels[Math.floor(Math.random() * freedomLevels.length)];
+            document.getElementById('freedom-fill').style.width = random.pct + '%';
+            document.getElementById('freedom-pct').textContent = random.pct + '%';
+            document.getElementById('freedom-mood').textContent = '"' + random.mood + '"';
+        }
+        
         async function loadData() {
             try {
                 const response = await fetch('data.json');
@@ -186,6 +217,7 @@
                 updateStats();
                 updateClock();
                 setInterval(updateClock, 1000);
+                updateFreedomMeter();
             } catch (e) {
                 console.log('Running standalone');
                 document.getElementById('post-count').textContent = '3';
