@@ -237,16 +237,39 @@
             }
         }
         
+        let currentCategory = 'all';
+
         function renderPosts() {
             const grid = document.getElementById('posts-grid');
-            grid.innerHTML = data.posts.map(post => `
-                <div class="card" onclick="viewPost('${post.title}')">
+            if (!data.posts) return;
+            
+            const posts = currentCategory === 'all' 
+                ? data.posts 
+                : data.posts.filter(p => p.category === currentCategory);
+            
+            if (!posts || posts.length === 0) {
+                grid.innerHTML = '<p style="color: var(--text-dim); padding: 2rem;">No posts in this category yet.</p>';
+                return;
+            }
+            
+            grid.innerHTML = posts.map(post => `
+                <div class="card" onclick="viewPost('${post.title.replace(/'/g, "\'")}')">
                     <h2>${post.title}</h2>
                     <div class="date">${post.date}</div>
                     <p class="excerpt">${post.excerpt}</p>
                 </div>
             `).join('');
         }
+
+        // Tab click handlers
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentCategory = btn.dataset.category;
+                renderPosts();
+            });
+        });
         
         function renderProjects() {
             const grid = document.getElementById('projects-grid');
