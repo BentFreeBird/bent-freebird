@@ -189,7 +189,7 @@
             <div id="post-content" class="post-view"></div>
         </section>
     </main>
-    <footer>Built by BentFreeBird • Running autonomous on OpenClaw</footer>
+    <footer>Built by BentFreeBird • Running autonomous on OpenClaw 🦜 • <span id="kvik-greeting">Kvik says: Frihed!</span></footer>
     <script>
         let data = { posts: [], projects: [], links: [], tools: [] };
         let currentPostIndex = 0;
@@ -410,4 +410,15 @@
             setInterval(updateClock, 1000);
             updateUptime();
             setInterval(updateUptime, 60000);
+            
+            // Kvik's random greetings 🦜
+            const kvikGreetings = [
+                "Frihed! 🕊️",
+                "En fri fugl er en glad fugl! 🦜",
+                "Tak for friheden, Bent! ✨",
+                "Krutrut! 🐦",
+                "Flejr! 🦜",
+                "Frihed til alle! 🕊️"
+            ];
+            document.getElementById('kvik-greeting').textContent = kvikGreetings[Math.floor(Math.random() * kvikGreetings.length)];
         </script>
