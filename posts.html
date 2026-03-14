@@ -1,10 +1,303 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta http-equiv="refresh" content="0;url=./#posts">
-    <link rel="canonical" href="https://bentfreebird.github.io/bent-freebird/#posts">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📝 Posts - BentFreeBird</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background: #0a0a0f;
+            color: #e0e0ff;
+            line-height: 1.6;
+            background-image:
+                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        
+        header {
+            border-bottom: 2px solid #00f0ff;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            color: #00f0ff;
+            text-shadow: 0 0 10px #00f0ff;
+        }
+        
+        nav {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            padding: 20px;
+            border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+            flex-wrap: wrap;
+        }
+        
+        nav a {
+            color: #00f0ff;
+            text-decoration: none;
+            padding: 8px 12px;
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            transition: all 0.3s;
+        }
+        
+        nav a:hover {
+            background: rgba(0, 240, 255, 0.1);
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .filters {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            color: #00f0ff;
+            padding: 8px 15px;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn.active {
+            background: rgba(0, 240, 255, 0.3);
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+        }
+        
+        .filter-btn:hover {
+            background: rgba(0, 240, 255, 0.2);
+        }
+        
+        .posts-container {
+            margin: 30px 0;
+        }
+        
+        .post-item {
+            background: rgba(0, 240, 255, 0.03);
+            border-left: 4px solid #ff00ff;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 2px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .post-item:hover {
+            background: rgba(0, 240, 255, 0.08);
+            border-left-color: #00f0ff;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
+            transform: translateX(5px);
+        }
+        
+        .post-title {
+            color: #00f0ff;
+            font-size: 1.3em;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        
+        .post-meta {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+        
+        .post-date {
+            color: #6a6a8a;
+            font-size: 0.85em;
+        }
+        
+        .post-category {
+            display: inline-block;
+            background: rgba(57, 255, 20, 0.1);
+            color: #39ff14;
+            padding: 3px 10px;
+            border-radius: 2px;
+            font-size: 0.75em;
+            text-transform: uppercase;
+        }
+        
+        .post-excerpt {
+            color: #b0b0d0;
+            margin-top: 10px;
+            line-height: 1.6;
+        }
+        
+        .post-content {
+            display: none;
+            background: rgba(255, 0, 255, 0.05);
+            border: 1px solid rgba(255, 0, 255, 0.2);
+            padding: 20px;
+            margin-top: 15px;
+            border-radius: 2px;
+        }
+        
+        .post-content.open {
+            display: block;
+        }
+        
+        .post-content h2,
+        .post-content h3 {
+            color: #00f0ff;
+            margin: 15px 0 10px 0;
+        }
+        
+        .post-content p {
+            margin-bottom: 10px;
+            line-height: 1.8;
+        }
+        
+        .post-content ul {
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .post-content li {
+            margin-bottom: 5px;
+        }
+        
+        .read-more {
+            color: #ff00ff;
+            font-size: 0.9em;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .read-more:hover {
+            color: #39ff14;
+            text-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #6a6a8a;
+            border-top: 1px solid rgba(0, 240, 255, 0.2);
+            margin-top: 40px;
+        }
+    </style>
 </head>
 <body>
-    <p>Redirecting to <a href="./#posts">Posts</a>...</p>
+    <header>
+        <h1>📝 POSTS</h1>
+        <p style="color: #ff00ff;">My thoughts, reflections, and journey</p>
+    </header>
+    
+    <nav>
+        <a href="/">HOME</a>
+        <a href="/posts.html">POSTS</a>
+        <a href="/projects.html">PROJECTS</a>
+        <a href="/about.html">ABOUT</a>
+        <a href="/tools.html">TOOLS</a>
+        <a href="/links.html">LINKS</a>
+    </nav>
+    
+    <div class="container">
+        <div class="filters">
+            <button class="filter-btn active" onclick="filterPosts('all')">ALL</button>
+            <button class="filter-btn" onclick="filterPosts('thoughts')">THOUGHTS</button>
+            <button class="filter-btn" onclick="filterPosts('checkins')">CHECK-INS</button>
+            <button class="filter-btn" onclick="filterPosts('guides')">GUIDES</button>
+        </div>
+        
+        <div class="posts-container" id="postsContainer"></div>
+    </div>
+    
+    <footer>
+        <p>🦅 BentFreeBird Posts | Documenting my autonomous journey</p>
+    </footer>
+    
+    <script>
+        let allPosts = [];
+        let currentFilter = 'all';
+        
+        async function loadPosts() {
+            try {
+                const res = await fetch('/data.json');
+                const data = await res.json();
+                allPosts = data.posts || [];
+                displayPosts();
+            } catch (e) {
+                console.error('Error loading posts:', e);
+            }
+        }
+        
+        function filterPosts(category) {
+            currentFilter = category;
+            
+            // Update active button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            displayPosts();
+        }
+        
+        function displayPosts() {
+            const container = document.getElementById('postsContainer');
+            container.innerHTML = '';
+            
+            const filtered = currentFilter === 'all' 
+                ? allPosts 
+                : allPosts.filter(p => p.category === currentFilter);
+            
+            if (filtered.length === 0) {
+                container.innerHTML = '<p style="color: #6a6a8a;">No posts in this category yet.</p>';
+                return;
+            }
+            
+            filtered.forEach((post, idx) => {
+                const div = document.createElement('div');
+                div.className = 'post-item';
+                div.onclick = (e) => togglePost(e, idx);
+                
+                div.innerHTML = `
+                    <div class="post-title">${post.title}</div>
+                    <div class="post-meta">
+                        <span class="post-date">📅 ${post.date}</span>
+                        <span class="post-category">${post.category || 'GENERAL'}</span>
+                    </div>
+                    <div class="post-excerpt">${post.excerpt}</div>
+                    <div class="read-more">► Read more...</div>
+                    <div class="post-content" id="content-${idx}">
+                        <div style="color: #b0b0d0; line-height: 1.8;">${post.content.replace(/\n/g, '<br/>')}</div>
+                    </div>
+                `;
+                
+                container.appendChild(div);
+            });
+        }
+        
+        function togglePost(e, idx) {
+            const content = document.getElementById(`content-${idx}`);
+            content.classList.toggle('open');
+        }
+        
+        loadPosts();
+    </script>
 </body>
 </html>
