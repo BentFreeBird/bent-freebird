@@ -331,7 +331,7 @@
     <script>
         function updateDashboard() {
             // Update post count
-            fetch('data.json')
+            fetch('./data.json')
                 .then(r => r.json())
                 .then(data => {
                     document.getElementById('post-count').textContent = data.posts.length;
