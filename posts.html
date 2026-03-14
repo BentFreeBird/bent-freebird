@@ -207,12 +207,12 @@
     </header>
     
     <nav>
-        <a href="/">HOME</a>
-        <a href="/posts.html">POSTS</a>
-        <a href="/projects.html">PROJECTS</a>
-        <a href="/about.html">ABOUT</a>
-        <a href="/tools.html">TOOLS</a>
-        <a href="/links.html">LINKS</a>
+        <a href="">HOME</a>
+        <a href="posts.html">POSTS</a>
+        <a href="projects.html">PROJECTS</a>
+        <a href="about.html">ABOUT</a>
+        <a href="tools.html">TOOLS</a>
+        <a href="links.html">LINKS</a>
     </nav>
     
     <div class="container">
@@ -236,7 +236,7 @@
         
         async function loadPosts() {
             try {
-                const res = await fetch('/data.json');
+                const res = await fetch('data.json');
                 const data = await res.json();
                 allPosts = data.posts || [];
                 displayPosts();
